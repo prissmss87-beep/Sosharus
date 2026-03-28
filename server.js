@@ -37,7 +37,9 @@ app.post("/login", async (req, res) => {
             { expiresIn: "1h"}
         )
 
-        res.status(200).json({ token, user: { id: user.id, name: user.name, email: user.email } })
+        
+
+        res.status(200).json({ token, user: { id: user.id, name: user.name, email: user.email, profileUrl:user.profileUrl } })
     } catch (error) {
         console.error(error)
         res.status(500).json({ message: "Erro no servidor" })
@@ -45,6 +47,8 @@ app.post("/login", async (req, res) => {
 })
 
 app.post("/users", async (req, res) => {
+
+    const { name, email, age, password } = req.body
 
     try {
         const salt = await bcrypt.genSalt(10)
@@ -57,7 +61,8 @@ app.post("/users", async (req, res) => {
                 name: req.body.name,
                 email: req.body.email,
                 age: req.body.age,
-                password: hashedPassword
+                password: hashedPassword,
+                profileUrl:name.toLowerCase()
             }
         })
         res.status(201).json(req.body)
@@ -120,6 +125,40 @@ app.delete("/users/:id", async (req, res) => {
     })
 
     res.status(200).json({ message: "Usuario deletado" })
+})
+
+app.put("/profile/:id", async (req, res) => {
+
+    const { bio, music, background } = req.body
+
+    try {
+
+        const updatedUser = await prisma.user.update({
+            where: { id: req.params.id},
+            data: { bio, music, background }
+        })
+        
+        res.status(200).json(updatedUser)
+    } catch (error) {
+        res.status(500).json({message: " Error Updating Profile"})
+    }
+
+})
+
+app.get("/u/:profileUrl", async (req, res) => {
+
+    try {
+        const user = await prisma.user.findUnique({
+            where: { profileUrl: req.params.profileUrl}
+        })
+        
+        if(!user) return res.status(404).json({message: "Profile Not Found"})    
+        res.status(200).json(user)
+
+    } catch (error) {
+        res.status(500).json({message: "Error In Server"})
+    }
+
 })
 
 
