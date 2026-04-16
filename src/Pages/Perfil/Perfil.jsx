@@ -11,13 +11,19 @@ function Profile() {
     const [bio, setBio] = useState("")
     const [music, setMusic] = useState("")
     const [background, setBackground] = useState("")
+    const [discord, setDiscord] = useState("")
+    const [instagram, setInstagram] = useState("")
+    const [steam, setSteam] = useState("")
 
     async function saveProfile() {
         
         await api.put(`/profile/${user.id}`, {
             bio,
             music,
-            background
+            background,
+            discord,
+            instagram,
+            steam
         })
         setUser(response.data)
         localStorage.setItem("user", JSON.stringify(response.data))
@@ -26,13 +32,19 @@ function Profile() {
 
     return(
         <div>
-            
-            <h1>My Profile</h1>
-            <input placeholder='Description' value={bio} onChange={e => setBio(e.target.value)}/>
-            <input placeholder='Music Link(Embed)' value={music} onChange={e => setMusic(e.target.value)}/>
-            <input placeholder='Image Link' value={background} onChange={e => setBackground(e.target.value)}/>
-            <button onClick={saveProfile}>Save</button>
-            <p>Public Profile: {user.profileUrl ? `http://localhost:3000/u/${user.profileUrl}`: "Not Defined"} </p>
+           <div className={styles.divisao}> <h1 className={styles.texto}>My Profile</h1> </div>  
+            <div className={styles.parte}>
+                <div className={styles.inputs}>
+                    <input className={styles.desc} placeholder='Description' value={bio} onChange={e => setBio(e.target.value)}/>
+                    <input className={styles.msc} placeholder='Music Link(Embed)' value={music} onChange={e => setMusic(e.target.value)}/>
+                    <input className={styles.image} placeholder='Image Link' value={background} onChange={e => setBackground(e.target.value)}/>
+                    <input className={styles.disc} placeholder='Discord Profile' value={discord} onChange={e => setDiscord(e.target.value)}/>
+                    <input className={styles.ig} placeholder='Instagram Profile' value={instagram} onChange={e => setInstagram(e.target.value)}/>
+                    <input className={styles.steam} placeholder='Steam Profile' value={steam} onChange={e => setSteam(e.target.value)}/>
+                    <button className={styles.save} onClick={saveProfile}>Save</button>
+                    <p className={styles.maita}>Public Profile: {user.profileUrl ? `http://localhost:5173/u/${user.profileUrl}`: "Not Defined"} </p>
+                </div>
+            </div>
         </div>
     )
 }

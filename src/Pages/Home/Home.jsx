@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import neh from '../../assets/neh.svg'
+import sosharu from '../../assets/sosharu.png'
 
 function Home() {
   const navigate = useNavigate();
@@ -26,37 +27,80 @@ function Home() {
   return (
     <div>
       <nav className={styles.cu}>
-        <img src={neh} className={styles.bixo} />
+        <img src={sosharu} className={styles.bixo}/>
         <div className={styles.mae}>
         {user && (
-          <button className={styles.logout} onClick={Logout}>
+          <button className={styles.button} onClick={Logout}>
             Logout
           </button>
         )}
 
-        <Link to="/login" className={styles.login}>
-          Login
-        </Link>
 
-        <Link to="/register" className={styles.register}>
-          Cadastro
-        </Link>
         </div>
       </nav>
 
       <div className={styles.header}>
-        <h1 className={styles.texto}>
-          Seja bem vindo{user ? `, ${user.name}` : ", Please Login"}!
-        </h1>
-        {user && (
-          <>
+
+        <div className={styles.menu}>
+          <div className={styles.text}>
+            <h1 className={styles.texto}>
+              Share about yourself with people from everywhere!
+            </h1>
+          </div>
+          <div className={styles.PB}>
+            {!user && (
+            <>
+            <Link to="/login" className={styles.buttonL}>
+              Login
+            </Link>
+
+           <Link to="/register" className={styles.buttonR}>
+              Register
+            </Link>
+          
+            </>
+            )}
+          </div>
+          <div className={styles.PB}>
+            {user && (
+             <>
+               <br/>
+               <Link to={`/u/${user.profileUrl}`}className={styles.buttonP}>My Profile</Link>          
+             </>
+            )}
+    
+            {user && (
+              <>
+                <br/>
+               <Link to="/profile" className={styles.buttonE}>Edit Profile</Link>
+              </>
+            )}
+          </div>
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div className={styles.bottom}>
+          <div className={styles.contact}>
+            <h1>Contact:</h1>
             <br/>
-            <Link to={`/u/${user.profileUrl}`}>My Profile</Link>
-          </>
-        )}
+            <h2>Discord: 
+              <a href="https://discord.gg/RCXEegty"> Sosharu</a>
+            </h2>
+            <br/>
+            <br/>
+            <h2>Instagram:
+              <a href="https://www.instagram.com/sosharusite/"> SosharuSite</a> 
+            </h2>
+            <br/>
+            <br/>
+            <h2>Email: sosharu2026@gmail.com</h2>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default Home;
