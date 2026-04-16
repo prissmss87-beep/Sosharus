@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import api from "../../services/api"
 import styles from "./Public.module.css";
+import discordIcon from "../../assets/discordic.svg"
+
 import instaIcon from "../../assets/insta.svg"
 import steamIcon from "../../assets/steamic.svg"
 
@@ -27,9 +29,8 @@ function Public() {
     if (!user) return <h1>Perfil não encontrado</h1>
 
     return (
-        
-        <div className={styles.image}
-        
+        <div
+            className={styles.image}
             style={{
                 backgroundImage: `url(${user.background})`,
                 backgroundSize: "cover",
@@ -42,38 +43,35 @@ function Public() {
             }}
         >
             <div className={styles.card}>
+
                 <h1>{user.name}</h1>
                 <p className={styles.bio}>{user.bio}</p>
-                <p>{user.discord}</p>
+                <div className={styles.row}>
+                    <img src={discordIcon} className={styles.icond} />
+                    <p>{user.discord}</p>
+                </div>
 
                 {user.instagram && (
-                <a 
-                    href={user.instagram} 
-                    className={styles.social}
-                >
-                    <img src={instaIcon} className={styles.icon} />
-                </a>
+                    <a href={user.instagram} className={styles.social}>
+                        <img src={instaIcon} className={styles.icon} />
+                    </a>
                 )}
 
                 {user.steam && (
-                <a 
-                    href={user.steam} 
-                    className={styles.social}
-                >
-                    <img src={steamIcon} className={styles.icon} />
-                </a>
+                    <a href={user.steam} className={styles.steam}>
+                        <img src={steamIcon} className={styles.icon} />
+                    </a>
                 )}
+                
 
-
-
-                {user.music && (
-                    <iframe
-                       width="300"
-                      height="80"
-                       src={user.music}
-                       title="music"
+            {user.music && (
+                <iframe
+                        src={`${user.music}${user.music.includes("?") ? "&" : "?"}autoplay=1&mute=1`}
+                        title="music"
+                        allow="autoplay"
                     />
                 )}
+
             </div>
         </div>
     )

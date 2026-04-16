@@ -35,3 +35,94 @@ body {
   word-break: break-word;
   overflow-wrap: break-word;
 }
+
+.steam {
+  margin-right: 55%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 6px;
+  
+}
+
+.icond {
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 699px) {
+.card {
+    width: 95%;
+    margin: 20px auto;
+
+    padding: 15px;
+
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+
+    border-radius: 20px;
+
+    color: white;
+    text-align: center;
+  }
+
+  .card h1 {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+
+  .icon {
+    height: 45px;
+    margin-top: 10px;
+  }
+
+  .bio {
+    font-size: 14px;
+    padding: 0 10px;
+
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  margin-bottom: 35%;
+
+  width: 1000px;
+  height: auto;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+
+  border-radius: 20px;
+
+  color: white;
+  text-align: center;
+}
+
+.card h1{
+  margin: 0;
+  margin-top: 4%;
+  margin-bottom: 10%;
+}
+
+.icon {
+  height: 60px;
+  margin-top: 5%;
+}
+
+.bio {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
