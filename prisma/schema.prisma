@@ -17,4 +17,7 @@ model User {
   music String?
   profileUrl String? @unique
   background String?
+  discord String?
+  instagram String?
+  steam String?
 }

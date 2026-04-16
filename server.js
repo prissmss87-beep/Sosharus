@@ -129,13 +129,13 @@ app.delete("/users/:id", async (req, res) => {
 
 app.put("/profile/:id", async (req, res) => {
 
-    const { bio, music, background } = req.body
+    const { bio, music, background, discord, instagram, steam } = req.body
 
     try {
 
         const updatedUser = await prisma.user.update({
             where: { id: req.params.id},
-            data: { bio, music, background }
+            data: { bio, music, background, discord, instagram, steam }
         })
         
         res.status(200).json(updatedUser)
